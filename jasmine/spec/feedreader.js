@@ -177,6 +177,23 @@ $(function() {
 			expect(feedListLength).toBe(initialFeedListLength + 1);
 			done();
 		});
-	})
+	});
+
+	describe('Adding an unvalid new feed', function () {
+		// This test is made with a unvalid feed url
+		var newFeedUrl = '';
+
+		var initialFeedsLength = allFeeds.length;
+
+		// Add feed is an asynchronous function
+		beforeEach(function (done) {
+			addFeed(newFeedUrl, done);
+		});
+
+		it('adds no new entry to allFeeds', function () {
+			expect(allFeeds.length).toBe(initialFeedsLength);
+			done();
+		});
+	});
 
 }());
