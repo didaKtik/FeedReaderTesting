@@ -26,36 +26,25 @@ $(function() {
 			expect(allFeeds.length).not.toBe(0);
 		});
 
-
-		/* TODO: Write a test that loops through each feed
-		 * in the allFeeds object and ensures it has a URL defined
-		 * and that the URL is not empty.
-		 */
-		 it('have non-empty urls', function () {
+		it('have non-empty urls', function () {
 			haveNonEmpty('url');
-		 });
+		});
 
-
-		/* TODO: Write a test that loops through each feed
-		 * in the allFeeds object and ensures it has a name defined
-		 * and that the name is not empty.
-		 */
-		 it('have non-empty names', function () {
+		it('have non-empty names', function () {
 			haveNonEmpty('name');
-		 });
+		});
 
-		 function haveNonEmpty (property) {
+		function haveNonEmpty (property) {
 			allFeeds.forEach(function (feed) {
 				var prop = feed[property];
 				expect(prop).toBeDefined();
 				expect(typeof prop).toBe('string');
 				expect(prop).not.toBe('');
 			});
-		 }
+		}
 	});
 
 
-	/* TODO: Write a new test suite named "The menu" */
 	describe('The menu', function () {
 		var menuIcon;
 
@@ -63,20 +52,10 @@ $(function() {
 			menuIcon = $('.menu-icon-link');
 		});
 
-		/* TODO: Write a test that ensures the menu element is
-		 * hidden by default. You'll have to analyze the HTML and
-		 * the CSS to determine how we're performing the
-		 * hiding/showing of the menu element.
-		 */
 		it('is hidden by default', function () {
 			expect($('body').hasClass('menu-hidden')).toBe(true);
 		});
 
-		 /* TODO: Write a test that ensures the menu changes
-		  * visibility when the menu icon is clicked. This test
-		  * should have two expectations: does the menu display when
-		  * clicked and does it hide when clicked again.
-		  */
 		it('displays when clicked', function () {
 			menuIcon.trigger('click');
 			expect($('body').hasClass('menu-hidden')).toBe(false);
@@ -88,7 +67,6 @@ $(function() {
 		});
 	});
 
-	/* TODO: Write a new test suite named "Initial Entries" */
 	describe('Initial Entries', function () {
 		/* TODO: Write a test that ensures when the loadFeed
 		 * function is called and completes its work, there is at least
@@ -96,9 +74,9 @@ $(function() {
 		 * Remember, loadFeed() is asynchronous so this test wil require
 		 * the use of Jasmine's beforeEach and asynchronous done() function.
 		 */
-		 beforeEach(function (done) {
+		beforeEach(function (done) {
 			loadFeed(0, done);
-		 });
+		});
 
 		it('contains at least one entry', function (done) {
 			var entries = $('.entry-link');
@@ -107,14 +85,7 @@ $(function() {
 		});
 	});
 
-
-
-	/* TODO: Write a new test suite named "New Feed Selection" */
 	describe('New Feed Selection', function () {
-		/* TODO: Write a test that ensures when a new feed is loaded
-		 * by the loadFeed function that the content actually changes.
-		 * Remember, loadFeed() is asynchronous.
-		 */
 		 var firstUrl;
 
 		 beforeEach(function (done) {
@@ -133,24 +104,26 @@ $(function() {
 
 	/* Additional feature: Add a new feed */
 	describe('The add menu', function () {
-		var addMenuIcon;
+		var addMenuIcon,
+			body;
 
 		beforeAll(function () {
 			addMenuIcon = $('.add-menu-icon');
+			body = $('body');
 		});
 
 		it('is hidden by default', function () {
-			expect($('body').hasClass('add-menu-hidden')).toBe(true);
+			expect(body.hasClass('add-menu-hidden')).toBe(true);
 		});
 
 		it('displays when clicked', function () {
 			addMenuIcon.trigger('click');
-			expect($('body').hasClass('add-menu-hidden')).toBe(false);
+			expect(body.hasClass('add-menu-hidden')).toBe(false);
 		});
 
 		it('hides when clicked gain', function () {
 			addMenuIcon.trigger('click');
-			expect($('body').hasClass('add-menu-hidden')).toBe(true);
+			expect(body.hasClass('add-menu-hidden')).toBe(true);
 		});
 	});
 
@@ -167,12 +140,12 @@ $(function() {
 			addFeed(newFeedUrl, done);
 		});
 
-		it('adds an entry to allFeeds', function () {
+		it('adds an entry to allFeeds', function (done) {
 			expect(allFeeds.length).toBe(initialFeedsLength + 1);
 			done();
 		});
 
-		it('adds a feed to the feed list', function () {
+		it('adds a feed to the feed list', function (done) {
 			var feedListLength = feedList.children().length;
 			expect(feedListLength).toBe(initialFeedListLength + 1);
 			done();
@@ -190,7 +163,7 @@ $(function() {
 			addFeed(newFeedUrl, done);
 		});
 
-		it('adds no new entry to allFeeds', function () {
+		it('adds no new entry to allFeeds', function (done) {
 			expect(allFeeds.length).toBe(initialFeedsLength);
 			done();
 		});
