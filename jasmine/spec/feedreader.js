@@ -68,20 +68,13 @@ $(function() {
 	});
 
 	describe('Initial Entries', function () {
-		/* TODO: Write a test that ensures when the loadFeed
-		 * function is called and completes its work, there is at least
-		 * a single .entry element within the .feed container.
-		 * Remember, loadFeed() is asynchronous so this test wil require
-		 * the use of Jasmine's beforeEach and asynchronous done() function.
-		 */
 		beforeEach(function (done) {
 			loadFeed(0, done);
 		});
 
-		it('contains at least one entry', function (done) {
+		it('contains at least one entry', function () {
 			var entries = $('.entry-link');
 			expect(entries.length).toBeGreaterThan(0);
-			done();
 		});
 	});
 
@@ -95,10 +88,9 @@ $(function() {
 			});
 		 });
 
-		 it('changes content', function (done) {
+		 it('changes content', function () {
 			var newFirstUrl = $('.entry-link')[0].href;
 			expect(newFirstUrl).not.toEqual(firstUrl);
-			done();
 		 });
 	});
 
@@ -140,15 +132,13 @@ $(function() {
 			addFeed(newFeedUrl, done);
 		});
 
-		it('adds an entry to allFeeds', function (done) {
+		it('adds an entry to allFeeds', function () {
 			expect(allFeeds.length).toBe(initialFeedsLength + 1);
-			done();
 		});
 
-		it('adds a feed to the feed list', function (done) {
+		it('adds a feed to the feed list', function () {
 			var feedListLength = feedList.children().length;
 			expect(feedListLength).toBe(initialFeedListLength + 1);
-			done();
 		});
 	});
 
@@ -163,9 +153,8 @@ $(function() {
 			addFeed(newFeedUrl, done);
 		});
 
-		it('adds no new entry to allFeeds', function (done) {
+		it('adds no new entry to allFeeds', function () {
 			expect(allFeeds.length).toBe(initialFeedsLength);
-			done();
 		});
 	});
 
